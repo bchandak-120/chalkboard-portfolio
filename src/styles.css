@@ -89,3 +89,26 @@ main{min-height:calc(100vh - 142px)}.page{width:100%;padding:clamp(24px,4vw,52px
 .home-grid.is-scattered .bento-card:hover,.home-grid.is-scattered .bento-card:focus-visible{z-index:4}
 .board-toggle{border:0;border-bottom:1px dashed rgba(168,211,156,.6);background:none;color:var(--green);font:12px 'Kalam',cursive;padding:2px 5px;cursor:pointer}
 .page-kicker>span:first-child{font-family:'Kalam',cursive;font-size:13px;letter-spacing:.08em}
+
+/* Home interests are loose chalk doodles, not another set of Bento tiles. */
+.home-grid.is-scattered .interest-float{translate:var(--scatter-x) var(--scatter-y);rotate:var(--scatter-r);transition:translate .75s cubic-bezier(.2,.9,.2,1),rotate .75s cubic-bezier(.2,.9,.2,1);animation:interestDrift 7s ease-in-out infinite}
+.home-grid.is-scattered .interest-float:nth-of-type(2n){animation-delay:-2.8s}
+.home-grid.is-scattered .interest-float:nth-of-type(3n){animation-delay:-4.2s}
+.home-grid.is-arranged .interest-float{translate:0 0;rotate:0deg;animation:none}
+.interest-float{position:relative;grid-column:span 2;align-self:start;justify-self:center;min-width:0;min-height:0;padding:0;overflow:visible;z-index:3}
+.interest-float.is-expanded{z-index:6}
+.interest-float:before{display:none}
+.interest-button{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;width:max-content;max-width:100%;min-width:90px;padding:0;border:0;background:none;color:#e8e5db;text-align:center;font:15px 'Kalam',cursive;text-shadow:0 0 9px rgba(238,239,226,.2);cursor:pointer}
+.interest-button svg{width:74px;height:58px;filter:drop-shadow(0 0 4px currentColor);stroke-dasharray:none}
+.interest-float.green .interest-button,.interest-float.green .interest-button svg{color:var(--green)}
+.interest-float.red .interest-button,.interest-float.red .interest-button svg{color:var(--red)}
+.interest-float.blue .interest-button,.interest-float.blue .interest-button svg{color:var(--blue)}
+.interest-float.white .interest-button,.interest-float.white .interest-button svg{color:#e8e5db}
+.interest-button .basil{stroke:#91c47e}
+.interest-copy{position:absolute;top:calc(100% + 6px);left:50%;z-index:7;width:min(265px,72vw);margin:0;padding:9px 5px;color:#e3e0d5;font:14px/1.5 'Kalam',cursive;text-shadow:0 1px 3px #090a0a;transform:translateX(-50%);background:rgba(12,14,14,.72);border-left:2px solid rgba(218,229,213,.58);box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.home-grid.is-arranged .interest-copy{position:relative;top:auto;left:auto;width:min(260px,72vw);transform:none;margin-top:7px}
+@keyframes interestDrift{0%,100%{translate:var(--scatter-x) var(--scatter-y)}50%{translate:var(--scatter-x) calc(var(--scatter-y) - 6px)}}
+@media(max-width:1100px){.interest-float{grid-column:span 4}}
+@media(max-width:720px){.home-grid.is-scattered .interest-float{translate:calc(var(--scatter-x) * .45) calc(var(--scatter-y) * .45)}.interest-float{grid-column:span 3;min-height:82px}.interest-button{font-size:13px}.interest-button svg{width:58px;height:48px}}
+@media(max-width:420px){.interest-float{grid-column:span 3}.interest-button{min-width:75px;font-size:12px}.interest-button svg{width:48px;height:42px}}
+@media(prefers-reduced-motion:reduce){.home-grid.is-scattered .interest-float{animation:none}}

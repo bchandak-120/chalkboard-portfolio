@@ -8,7 +8,7 @@ const navItems = [
 
 const interests = [
   { id: 'hockey', title: 'Field hockey', className: 'green', detail: 'I played Division I hockey in high school for four years, winning the title all four years. It taught me discipline, teamwork, and most importantly: healthy competition.' },
-  { id: 'pasta', title: 'Spaghetti, obviously', className: 'red', detail: 'I know every man says this, but I can claim with 97% confidence that I make the best pasta. P.S.: I don’t break my spaghetti.' },
+  { id: 'pasta', title: 'Spaghetti', className: 'red', detail: 'I know every man says this, but I can claim with 97% confidence that I make the best pasta. P.S.: I don’t break my spaghetti.' },
   { id: 'ikigai', title: 'Ikigai', className: 'white', detail: 'Avid reader, currently exploring purpose, balance, and the small habits that make life meaningful.' },
   { id: 'pickleball', title: 'Pickleball', className: 'green', detail: 'I’m a sports guy and love learning new things; I’ll probably be down for a game even after a long work week.' },
   { id: 'football', title: 'Football', className: 'blue', detail: 'I fell in love with the game the second I landed in America. I’m a Hoosiers and Bills fan; I’ll wear a jersey underneath on game day.' },
@@ -146,8 +146,8 @@ function App() {
               <BentoCard style={scatterStyle(1)} className="home-portrait chalk-panel"><img src={`${import.meta.env.BASE_URL}images/portrait.jpeg`} alt="Bhavesh at an outdoor ice rink in Chicago"/><span className="photo-caption">Chicago · rink-side</span></BentoCard>
               <BentoCard style={scatterStyle(2)} className="education-card chalk-panel"><p className="eyebrow">Two lenses</p><h2>Education</h2><div className="degree-note"><strong>B.S. in Business</strong><b>With Distinction</b><span>Economic Consulting<br/>Business Analytics</span></div><div className="degree-note"><strong>B.S. in Economics and Quantitative Methods</strong><b>With Distinction</b><span>Quantitative Economics · STEM</span></div></BentoCard>
               <BentoCard style={scatterStyle(3)} className="honors-card chalk-panel"><p className="eyebrow">Indiana University</p><h2>Academic honors</h2><p>Global Engagement Scholarship · Founders Scholar · Executive Dean’s List · Hutton Honors College · Phi Eta Sigma · Alpha Lambda Delta</p></BentoCard>
-              {interests.map((item, i) => <motion.article style={scatterStyle(i + 4)} layout key={item.id} className={`interest-card bento-card chalk-panel ${item.className} ${interest === item.id ? 'is-expanded' : ''}`} whileHover={{ y: -4 }} onClick={() => setInterest(interest === item.id ? '' : item.id)}>
-                <button className="interest-button" aria-expanded={interest === item.id}><Doodle id={item.id}/><span>{item.title}</span><span className="plus">{interest === item.id ? '−' : '+'}</span></button>
+              {interests.map((item, i) => <motion.article style={scatterStyle(i + 4)} layout key={item.id} className={`interest-float ${item.className} ${interest === item.id ? 'is-expanded' : ''}`} whileHover={{ y: -4 }}>
+                <button type="button" className="interest-button" aria-expanded={interest === item.id} onClick={() => setInterest(interest === item.id ? '' : item.id)}><Doodle id={item.id}/><span>{item.title}</span></button>
                 <AnimatePresence>{interest === item.id && <motion.p className="interest-copy" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>{item.detail}</motion.p>}</AnimatePresence>
               </motion.article>)}
               <BentoCard style={scatterStyle(9)} className="contact-teaser chalk-panel" onClick={envelopeToContact}>
