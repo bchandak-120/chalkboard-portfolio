@@ -48,6 +48,15 @@ function Doodle({ id }) {
   return <svg viewBox="0 0 80 58" aria-hidden="true"><path d="M12 37c-7-8 5-23 19-30s31-2 36 6-4 24-18 32-29 0-37-8zM18 35l42-22M30 12l17 38M24 18l17 36M38 9l17 36"/></svg>;
 }
 
+function LandmarkSketch({ kind }) {
+  if (kind === 'taj') return <svg className="landmark-art" viewBox="0 0 180 110" role="img" aria-label="Chalk sketch of the Taj Mahal">
+    <g><path d="M18 95h144M29 89h122M39 83h102M48 79V61h84v18M52 61c4-17 22-21 38-21s34 4 38 21M67 41c0-17 8-26 23-29 15 3 23 12 23 29M90 12V6M77 42v-8m26 8v-8M59 79V67q14-22 28 0v12m7 0V67q14-22 28 0v12M25 82V48l7-7 7 7v34M141 82V48l7-7 7 7v34M28 41V25l4-6 4 6v16M144 41V25l4-6 4 6v16"/></g>
+  </svg>;
+  return <svg className="landmark-art" viewBox="0 0 180 110" role="img" aria-label="Chalk sketch of the Victoria Memorial in Kolkata">
+    <g><path d="M13 93h154M22 89h136M29 83h122M36 78h108M42 78V61h96v17M47 61h86M53 60V44h74v16M61 44c4-16 15-23 32-25 17 2 28 9 32 25M93 19V8m-4 0h8M76 44V34m34 10V34M59 60V50m68 10V50M31 83V65m12 18V65m94 18V65m12 18V65M69 78V63m14 15V63m20 15V63m14 15V63M29 65h14m94 0h14M74 60V49q19-23 38 0v11M89 89V72q4-8 8 0v17"/></g>
+  </svg>;
+}
+
 function BentoCard({ className = '', children, onClick, ...props }) {
   const Component = onClick ? motion.button : motion.article;
   return <Component type={onClick ? 'button' : undefined} layout whileHover={{ y: -3 }} transition={{ type: 'spring', stiffness: 300, damping: 24 }} className={`bento-card ${className}`} onClick={onClick} {...props}>{children}</Component>;
@@ -56,17 +65,20 @@ function BentoCard({ className = '', children, onClick, ...props }) {
 function WorldMap() {
   return <svg className="world-map" viewBox="0 0 1000 360" role="img" aria-label="Map showing a westward route from India to Indiana">
     <g className="land">
-      <path d="M43 76 76 44l43 4 18-14 38 11 23-9 28 17 42-5 30 21 39 5 17 22-17 20-34 9-17 28-26 7-9 24-24 5-18-15-16 5-11-16-25-2-20-20-27-5-9-26-31-5-13-27-22 3z"/>
-      <path d="m285 191 23 8 21 20 17 8-3 20 20 15-8 19-9 27-17 31-15-12-11-34-18-17-4-30-17-18 2-22-15-9z"/>
-      <path d="m490 83 17-12 25 4 12-8 30 6 14 15-12 13-20 3-15 12-19-4-15-13-20-2z"/>
-      <path d="m531 124 26-9 28 5 23-12 45 8 26-15 54 2 20 15 43-7 35 16 53-3 28 14-18 20-37 8-26 23-31 3-20 18-24-7-18-21-26 8-27-10-24 6-31-14-18 11-26-7-8-22-26-5z"/>
-      <path d="m574 177 31-12 35 9 22 22-5 22-13 11-10 27-18 37-24 22-18-22-5-31-15-23 2-24-13-20 10-18z"/>
-      <path d="m735 190 14-5 8 13-5 15-11-4zM769 164l18-9 21 6 7 15-15 7-19-7zM810 205l23-12 24 12 11 20-18 12-11 24-17-12-10-21zM846 267l18 5 12 16-6 25-13 16-14-18-3-23zM919 205l23-9 19 13 2 24-18 12-16-11z"/>
+      <path d="m55 101 20-28 27-8 20-20 37 7 16-11 31 12 25-5 23 12 37-4 29 17 24 2 13 19-21 13-14 25-31 4-12 20-23-8-18-17-25 2-17-15-26 2-19-13-30 5-15-14-28 9-16-9z"/>
+      <path d="m338 66 23-20 31 5 19 19-12 20-33 4-24-12z"/>
+      <path d="m288 178 18 7 15 22 19 12 7 22-12 21-8 30-17 27-13-15-6-30-14-20-3-25-14-22 4-19z"/>
+      <path d="m469 104 17-15 26 1 13 12-7 15-23 6-22-7z"/>
+      <path d="m475 137 22-9 27 5 21 15 16 29-9 28-15 30-19 31-17-18-4-30-12-23-14-17 3-22-13-19z"/>
+      <path d="m527 105 23-20 42 4 20-16 48 7 27-14 55 5 26-8 57 13 38 26 32 9-8 19-30 7-22 18-33-4-24 17-28-5-16 19-24-8-14-21-31 5-18-12-24 5-23-14-24 9-21-13-24 7-17-18-29-5z"/>
+      <path d="m672 161 20-9 20 9 16 22-9 12-18-9-18 3-11-14z"/>
+      <path d="m800 250 25-13 28 5 21 17-8 17-24 8-26-9-17-12z"/>
+      <path d="m439 282 13-9 11 8-4 18-12 6z"/>
     </g>
-    <path className="map-route" d="M803 189 C730 140 657 139 604 147 S457 150 349 159"/>
-    <circle cx="803" cy="189" r="8" className="map-dot india-dot"/><circle cx="349" cy="159" r="8" className="map-dot iu-dot"/>
-    <text x="818" y="184" className="map-label">India</text><text x="247" y="145" className="map-label">Indiana University</text>
-    <text x="608" y="319" className="continent-label">AFRICA</text><text x="708" y="110" className="continent-label">ASIA</text><text x="112" y="235" className="continent-label">NORTH AMERICA</text>
+    <path className="map-route" d="M682 171 C595 117 473 118 398 135 S304 151 267 145"/>
+    <circle cx="682" cy="171" r="8" className="map-dot india-dot"/><circle cx="267" cy="145" r="8" className="map-dot iu-dot"/>
+    <text x="697" y="168" className="map-label">India</text><text x="183" y="132" className="map-label">Indiana University</text>
+    <text x="514" y="294" className="continent-label">AFRICA</text><text x="712" y="109" className="continent-label">ASIA</text><text x="105" y="225" className="continent-label">NORTH AMERICA</text>
   </svg>;
 }
 
@@ -112,7 +124,8 @@ function App() {
   function envelopeToContact() {
     if (openingEnvelope) return;
     setOpeningEnvelope(true);
-    window.setTimeout(() => { setOpeningEnvelope(false); goTo('contact'); }, 600);
+    window.setTimeout(() => goTo('contact'), 760);
+    window.setTimeout(() => setOpeningEnvelope(false), 980);
   }
 
   const activeProject = projects.find((item) => item.id === selectedProject) || projects[0];
@@ -125,6 +138,12 @@ function App() {
 
   return <div className="app-shell">
     <div className="chalk-dust" aria-hidden="true" />
+    <AnimatePresence>{openingEnvelope && <motion.div className="envelope-transition" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .28 }} aria-hidden="true">
+      <motion.div className="transition-envelope" initial={{ scale: .55, rotate: -5 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 8, opacity: 0 }} transition={{ duration: .78, ease: [0.2, 0.8, 0.2, 1] }}>
+        <svg viewBox="0 0 160 112"><path className="envelope-paper" d="M8 13h144v88H8z"/><path className="envelope-flap" d="M9 15 80 70l71-55"/><path d="M9 99 56 60M151 99 104 60"/></svg>
+        <span>Get in touch</span>
+      </motion.div>
+    </motion.div>}</AnimatePresence>
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className="site-header">
       <button className="brand" onClick={() => goTo('home')} aria-label="Bhavesh Chandak, home"><span className="brand-mark">BC</span><span>Bhavesh Chandak</span></button>
@@ -151,7 +170,7 @@ function App() {
                 <AnimatePresence>{interest === item.id && <motion.p className="interest-copy" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>{item.detail}</motion.p>}</AnimatePresence>
               </motion.article>)}
               <BentoCard style={scatterStyle(9)} className="contact-teaser chalk-panel" onClick={envelopeToContact}>
-                <motion.div className={`envelope ${openingEnvelope ? 'is-opening' : ''}`} animate={openingEnvelope ? { rotateX: 40, y: -10 } : { rotateX: 0, y: 0 }}><svg viewBox="0 0 72 52" aria-hidden="true"><path d="M5 7h62v39H5zM6 9l30 23L66 9M6 45l22-19M66 45 44 26"/></svg></motion.div><strong>Get in touch</strong><span>Open the contact page ↗</span>
+                <motion.div className={`envelope ${openingEnvelope ? 'is-opening' : ''}`} animate={openingEnvelope ? { scale: 1.06, y: -5 } : { scale: 1, y: 0 }}><svg viewBox="0 0 72 52" aria-hidden="true"><path className="envelope-paper" d="M5 7h62v39H5z"/><path className="envelope-flap" d="M6 9 36 32 66 9"/><path d="M6 45l22-19M66 45 44 26"/></svg><b>Get in touch</b></motion.div><span>Open the contact page ↗</span>
               </BentoCard>
             </div></LayoutGroup>
           </>}
@@ -162,7 +181,7 @@ function App() {
               <BentoCard className="map-card chalk-panel"><WorldMap/><p className="map-caption">India → Bloomington, Indiana</p></BentoCard>
               <BentoCard className="origin-card chalk-panel"><p className="eyebrow">01 · Where I started</p><h2>India</h2><p>I grew up in India, then crossed the world to study at Indiana University.</p></BentoCard>
               <BentoCard className="why-card chalk-panel"><p className="eyebrow">02 · Why IU</p><h2>A place to bring both fields together.</h2><p>IU gave me the chance to combine Kelley’s applied business education with rigorous quantitative economics.</p></BentoCard>
-              <BentoCard className="landmark-card chalk-panel"><p className="eyebrow">Places that stay with me</p><div className="landmarks"><div><span className="landmark-sketch taj" aria-hidden="true">⌂</span><strong>Taj Mahal</strong></div><div><span className="landmark-sketch victoria" aria-hidden="true">⌂</span><strong>Victoria Memorial</strong></div></div></BentoCard>
+              <BentoCard className="landmark-card chalk-panel"><p className="eyebrow">Places that stay with me</p><div className="landmarks"><div><LandmarkSketch kind="taj"/><strong>Taj Mahal</strong></div><div><LandmarkSketch kind="victoria"/><strong>Victoria Memorial</strong></div></div></BentoCard>
               <BentoCard className="degree-card chalk-panel"><p className="eyebrow">03 · Two lenses</p><div className="degree-note"><strong>B.S. in Business</strong><span>Economic Consulting · Business Analytics</span><b>With Distinction</b></div><div className="degree-note"><strong>B.S. in Economics and Quantitative Methods</strong><span>Quantitative Economics · STEM</span><b>With Distinction</b></div></BentoCard>
               <BentoCard className="about-outro chalk-panel"><p>Together, these paths taught me to look at decisions from both sides: the organization making the choice and the economic forces around it.</p></BentoCard>
             </div></LayoutGroup>
@@ -181,7 +200,7 @@ function App() {
             <div className="page-heading"><p className="eyebrow">A TIMELINE WITH A SLOPE</p><h1>Skills, over time</h1><p className="lead">Tools and skills grew alongside the questions I was working on.</p></div>
             <div className="chart-shell chalk-panel">
               <div className="chart-legend"><span><i className="tool-key"/>Tools</span><span><i className="skill-key"/>Skills</span></div>
-              <div className="chart-area"><span className="y-axis">Tools / Skills</span><svg className="curve-svg" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true"><path className="curve-fill" d="M70 430 C330 430 660 420 930 90 L930 430Z"/><path className="curve-line" d="M70 430 C330 430 660 420 930 90"/><path className="axis" d="M70 55V430H950"/></svg>
+              <div className="chart-area"><span className="y-axis">Tools / Skills</span><svg className="curve-svg" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true"><path className="curve-fill" d="M70 430 C330 430 660 420 930 90 L930 430Z"/><motion.path className="curve-line" d="M70 430 C330 430 660 420 930 90" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, ease: 'easeOut' }}/><path className="axis" d="M70 55V430H950"/></svg>
                 <div className="year-grid">{Object.keys(years).map((year, i) => <motion.button layout key={year} className={`year-card chalk-panel ${selectedYear === year ? 'is-selected' : ''}`} style={{ '--rise': `${i * 11}px` }} onMouseEnter={() => setSelectedYear(year)} onFocus={() => setSelectedYear(year)} onClick={() => setSelectedYear(selectedYear === year ? '' : year)} whileHover={{ scale: 1.04 }}><strong>{year}</strong><small><span>Tools {years[year].tools.length}</span><span>Skills {years[year].skills.length}</span></small>{selectedYear === year && <motion.div className="year-popover" layoutId="year-popover"><b>Tools</b><span>{years[year].tools.join(' · ')}</span><b>Skills</b><span>{years[year].skills.join(' · ')}</span></motion.div>}</motion.button>)}</div>
                 <span className="x-axis">Time</span>
               </div>

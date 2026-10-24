@@ -112,3 +112,37 @@ main{min-height:calc(100vh - 142px)}.page{width:100%;padding:clamp(24px,4vw,52px
 @media(max-width:720px){.home-grid.is-scattered .interest-float{translate:calc(var(--scatter-x) * .45) calc(var(--scatter-y) * .45)}.interest-float{grid-column:span 3;min-height:82px}.interest-button{font-size:13px}.interest-button svg{width:58px;height:48px}}
 @media(max-width:420px){.interest-float{grid-column:span 3}.interest-button{min-width:75px;font-size:12px}.interest-button svg{width:48px;height:42px}}
 @media(prefers-reduced-motion:reduce){.home-grid.is-scattered .interest-float{animation:none}}
+
+/* Final page transitions and story details */
+.experience-grid{grid-template-columns:minmax(0,1fr);gap:17px;padding:10px 0}
+.experience-grid:before{left:50%;border-left:2px dotted rgba(168,211,156,.8)}
+.experience-card,.experience-card:nth-child(3n+1){width:calc(50% - 28px);min-height:166px}
+.experience-card:nth-child(odd){justify-self:start}
+.experience-card:nth-child(even){justify-self:end}
+.experience-layout.is-arranged .experience-card{min-height:148px}
+.landmark-art{display:block;width:100%;height:100px;fill:none;stroke:#e3e1d6;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:3 1;filter:drop-shadow(0 0 3px rgba(231,234,218,.25));overflow:visible}
+.landmarks>div{min-width:0}
+.landmarks strong{font:12px 'Kalam',cursive;color:#e3e1d6}
+.landmark-card{grid-column:span 4}
+.envelope{position:relative;flex:0 0 124px;width:124px}
+.envelope svg{display:block;width:100%;height:auto}
+.envelope .envelope-paper{fill:rgba(20,25,21,.86);stroke:var(--green)}
+.envelope .envelope-flap{transform-box:fill-box;transform-origin:50% 0%;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.envelope.is-opening .envelope-flap{transform:rotateX(180deg)}
+.envelope b{position:absolute;inset:19px 3px auto;text-align:center;color:#e6e3d8;font:12px 'Kalam',cursive;pointer-events:none}
+.envelope-transition{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(12,15,13,.96);background-image:linear-gradient(to right,rgba(218,231,215,.12) 1px,transparent 1px),linear-gradient(to bottom,rgba(218,231,215,.12) 1px,transparent 1px);background-size:42px 42px}
+.transition-envelope{position:relative;width:min(340px,68vw);filter:drop-shadow(0 14px 30px rgba(0,0,0,.45))}
+.transition-envelope svg{display:block;width:100%;fill:none;stroke:var(--green);stroke-width:1.6;stroke-dasharray:3 1}
+.transition-envelope .envelope-paper{fill:#19201b}
+.transition-envelope .envelope-flap{fill:rgba(168,211,156,.08);transform-box:fill-box;transform-origin:50% 0%;animation:openFlap .45s .15s forwards}
+.transition-envelope span{position:absolute;top:47%;left:0;right:0;text-align:center;color:#e8e5db;font:clamp(17px,3vw,24px) 'Kalam',cursive}
+@keyframes openFlap{to{transform:rotateX(180deg)}}
+.curve-line{stroke-dasharray:none}
+@media(max-width:720px){
+  .experience-grid{grid-template-columns:1fr;gap:12px;padding:8px 0 8px 20px}
+  .experience-grid:before{left:7px;right:auto}
+  .experience-card,.experience-card:nth-child(3n+1){width:100%;min-height:145px;justify-self:stretch}
+  .experience-card:nth-child(odd),.experience-card:nth-child(even){rotate:0deg}
+  .landmark-card{grid-column:span 6}
+  .landmark-art{height:86px}
+}
