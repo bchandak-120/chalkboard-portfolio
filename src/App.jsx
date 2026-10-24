@@ -76,6 +76,12 @@ function App() {
   const [interest, setInterest] = useState('');
   const [selectedExperience, setSelectedExperience] = useState('');
   const [arranged, setArranged] = useState(false);
+  const [homeArranged, setHomeArranged] = useState(false);
+  const [scatterPoints] = useState(() => Array.from({ length: 10 }, () => ({
+    x: Math.round((Math.random() - 0.5) * 28),
+    y: Math.round((Math.random() - 0.5) * 34),
+    r: (Math.random() - 0.5) * 5.2,
+  })));
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedProject, setSelectedProject] = useState('valuation');
   const [openingEnvelope, setOpeningEnvelope] = useState(false);
@@ -109,6 +115,11 @@ function App() {
 
   const activeProject = projects.find((item) => item.id === selectedProject) || projects[0];
   const activeExperience = experiences.find((item) => item.id === selectedExperience);
+  const scatterStyle = (index) => ({
+    '--scatter-x': `${homeArranged ? 0 : scatterPoints[index].x}px`,
+    '--scatter-y': `${homeArranged ? 0 : scatterPoints[index].y}px`,
+    '--scatter-r': `${homeArranged ? 0 : scatterPoints[index].r}deg`,
+  });
 
   return <div className="app-shell">
     <div className="chalk-dust" aria-hidden="true" />
@@ -122,21 +133,22 @@ function App() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.section key={page} className={`page page-${page}`} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.28, ease: 'easeOut' }}>
           {page === 'home' && <>
-            <div className="page-kicker"><span>FIELD NOTES · 01</span><span>BUSINESS × ECONOMICS × ANALYTICS</span></div>
-            <LayoutGroup id="home-bento"><div className="bento-grid home-grid">
-              <BentoCard className="home-intro chalk-panel">
+            <div className="page-kicker"><span>FIELD NOTES · 01</span><span>BUSINESS × ECONOMICS × ANALYTICS</span><button className="board-toggle" onClick={() => setHomeArranged(!homeArranged)}>{homeArranged ? 'Scatter the notes ↗' : 'Arrange the board ↗'}</button></div>
+            <LayoutGroup id="home-bento"><div className={`bento-grid home-grid ${homeArranged ? 'is-arranged' : 'is-scattered'}`}>
+              <div className="chalk-marginalia" aria-hidden="true"><span className="marginalia-a">MODEL → DECISION</span><span className="marginalia-b">BUSINESS × ECONOMICS</span><svg viewBox="0 0 160 80"><path d="M5 68 C38 68 58 60 76 48 S117 28 154 7"/><path d="M142 7h12v12"/></svg></div>
+              <BentoCard style={scatterStyle(0)} className="home-intro chalk-panel">
                 <p className="eyebrow">Indiana University · Class of 2026</p><h1>Making sense<br/><em>of the moving parts.</em></h1>
                 <p className="intro-copy">I work where business decisions and economic questions meet.</p>
                 <div className="home-social"><a href="https://www.linkedin.com/in/bhaveshchandak" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="https://github.com/bchandak-120" target="_blank" rel="noreferrer">GitHub ↗</a></div>
               </BentoCard>
-              <BentoCard className="home-portrait chalk-panel"><img src={`${import.meta.env.BASE_URL}images/portrait.jpeg`} alt="Bhavesh at an outdoor ice rink in Chicago"/><span className="photo-caption">Chicago · rink-side</span></BentoCard>
-              <BentoCard className="education-card chalk-panel"><p className="eyebrow">Two lenses</p><h2>Education</h2><div className="degree-note"><strong>B.S. in Business</strong><b>With Distinction</b><span>Economic Consulting<br/>Business Analytics</span></div><div className="degree-note"><strong>B.S. in Economics and Quantitative Methods</strong><b>With Distinction</b><span>Quantitative Economics · STEM</span></div></BentoCard>
-              <BentoCard className="honors-card chalk-panel"><p className="eyebrow">Indiana University</p><h2>Academic honors</h2><p>Global Engagement Scholarship · Founders Scholar · Executive Dean’s List · Hutton Honors College · Phi Eta Sigma · Alpha Lambda Delta</p></BentoCard>
-              {interests.map((item) => <motion.article layout key={item.id} className={`interest-card bento-card chalk-panel ${item.className} ${interest === item.id ? 'is-expanded' : ''}`} whileHover={{ y: -4 }} onClick={() => setInterest(interest === item.id ? '' : item.id)}>
+              <BentoCard style={scatterStyle(1)} className="home-portrait chalk-panel"><img src={`${import.meta.env.BASE_URL}images/portrait.jpeg`} alt="Bhavesh at an outdoor ice rink in Chicago"/><span className="photo-caption">Chicago · rink-side</span></BentoCard>
+              <BentoCard style={scatterStyle(2)} className="education-card chalk-panel"><p className="eyebrow">Two lenses</p><h2>Education</h2><div className="degree-note"><strong>B.S. in Business</strong><b>With Distinction</b><span>Economic Consulting<br/>Business Analytics</span></div><div className="degree-note"><strong>B.S. in Economics and Quantitative Methods</strong><b>With Distinction</b><span>Quantitative Economics · STEM</span></div></BentoCard>
+              <BentoCard style={scatterStyle(3)} className="honors-card chalk-panel"><p className="eyebrow">Indiana University</p><h2>Academic honors</h2><p>Global Engagement Scholarship · Founders Scholar · Executive Dean’s List · Hutton Honors College · Phi Eta Sigma · Alpha Lambda Delta</p></BentoCard>
+              {interests.map((item, i) => <motion.article style={scatterStyle(i + 4)} layout key={item.id} className={`interest-card bento-card chalk-panel ${item.className} ${interest === item.id ? 'is-expanded' : ''}`} whileHover={{ y: -4 }} onClick={() => setInterest(interest === item.id ? '' : item.id)}>
                 <button className="interest-button" aria-expanded={interest === item.id}><Doodle id={item.id}/><span>{item.title}</span><span className="plus">{interest === item.id ? '−' : '+'}</span></button>
                 <AnimatePresence>{interest === item.id && <motion.p className="interest-copy" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>{item.detail}</motion.p>}</AnimatePresence>
               </motion.article>)}
-              <BentoCard className="contact-teaser chalk-panel" onClick={envelopeToContact}>
+              <BentoCard style={scatterStyle(9)} className="contact-teaser chalk-panel" onClick={envelopeToContact}>
                 <motion.div className={`envelope ${openingEnvelope ? 'is-opening' : ''}`} animate={openingEnvelope ? { rotateX: 40, y: -10 } : { rotateX: 0, y: 0 }}><svg viewBox="0 0 72 52" aria-hidden="true"><path d="M5 7h62v39H5zM6 9l30 23L66 9M6 45l22-19M66 45 44 26"/></svg></motion.div><strong>Get in touch</strong><span>Open the contact page ↗</span>
               </BentoCard>
             </div></LayoutGroup>
