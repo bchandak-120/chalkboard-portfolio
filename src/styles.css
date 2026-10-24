@@ -61,3 +61,31 @@ main{min-height:calc(100vh - 142px)}.page{width:100%;padding:clamp(24px,4vw,52px
 .site-footer{border-top:1px dashed rgba(233,236,221,.38)}
 @media(max-width:720px){.app-shell:before{background-size:32px 32px,32px 32px,100% 100%,100% 100%}.chalk-marginalia{display:none}.experience-grid:before{left:8px}.experience-card:nth-child(odd),.experience-card:nth-child(even){rotate:0deg}}
 @media(prefers-reduced-motion:reduce){.home-grid.is-scattered .interest-card{animation:none}}
+
+/* Let the drawing-board idea lead the layout: visible grid, matte slate,
+   chalk-note edges, and a wider initial scatter that settles on request. */
+.app-shell:before{
+  --grid:rgba(205,218,203,.19);
+  background-image:
+    radial-gradient(ellipse at 13% 21%,rgba(255,255,255,.018),transparent 42%),
+    radial-gradient(ellipse at 84% 76%,rgba(255,255,255,.014),transparent 38%),
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,46px 46px,46px 46px;
+}
+.chalk-dust{opacity:.23}
+.chalk-panel,.bento-card{
+  background-color:rgba(18,21,21,.82);
+  background-image:radial-gradient(ellipse at 20% 0%,rgba(235,238,222,.045),transparent 67%);
+  border:1px dashed rgba(235,234,218,.36);
+  border-radius:2px 5px 3px 4px;
+  box-shadow:0 8px 25px rgba(0,0,0,.17);
+}
+.chalk-panel:before,.bento-card:before{
+  background-image:radial-gradient(circle at 18% 32%,rgba(255,255,255,.018) 0 1px,transparent 1.5px),radial-gradient(circle at 72% 68%,rgba(255,255,255,.014) 0 1px,transparent 1.5px);
+  background-size:29px 31px,37px 41px;
+}
+.home-grid.is-scattered .bento-card{box-shadow:0 14px 28px rgba(0,0,0,.32),0 0 0 1px rgba(235,234,218,.035)}
+.home-grid.is-scattered .bento-card:hover,.home-grid.is-scattered .bento-card:focus-visible{z-index:4}
+.board-toggle{border:0;border-bottom:1px dashed rgba(168,211,156,.6);background:none;color:var(--green);font:12px 'Kalam',cursive;padding:2px 5px;cursor:pointer}
+.page-kicker>span:first-child{font-family:'Kalam',cursive;font-size:13px;letter-spacing:.08em}

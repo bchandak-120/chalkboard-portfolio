@@ -78,9 +78,11 @@ function App() {
   const [arranged, setArranged] = useState(false);
   const [homeArranged, setHomeArranged] = useState(false);
   const [scatterPoints] = useState(() => Array.from({ length: 10 }, () => ({
-    x: Math.round((Math.random() - 0.5) * 28),
-    y: Math.round((Math.random() - 0.5) * 34),
-    r: (Math.random() - 0.5) * 5.2,
+    // Give the notes real breathing room around their grid positions so the
+    // first view reads as a working board, not a perfectly aligned dashboard.
+    x: Math.round((Math.random() - 0.5) * (innerWidth < 720 ? 18 : 86)),
+    y: Math.round((Math.random() - 0.5) * (innerWidth < 720 ? 22 : 58)),
+    r: (Math.random() - 0.5) * (innerWidth < 720 ? 3 : 9),
   })));
   const [selectedYear, setSelectedYear] = useState('');
   const [selectedProject, setSelectedProject] = useState('valuation');
