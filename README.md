@@ -1,22 +1,23 @@
-# Bhavesh Chandak — Chalkboard Portfolio
+# Chalkboard portfolio
 
-A buildless HTML, CSS, and JavaScript portfolio. The pages use a persistent chalkboard grid and dust texture, with interactive interest notes, an animated experience timeline, a hoverable skills curve, project case studies, and a contact transition.
+React portfolio with a matte chalkboard grid, dust texture, bento cards, and spring-based interactions.
+
+## Stack
+
+- React + Vite
+- Motion for React (`motion/react`)
+- Custom responsive Bento UI components in React
+- GitHub Actions + GitHub Pages
 
 ## Run locally
 
-From this folder, start a static server with:
+```bash
+npm install
+npm run dev
+```
 
-    python3 -m http.server 4173
+Open the local URL printed by Vite. For a production build, run `npm run build`; `npm run preview` serves that build locally.
 
-Open http://localhost:4173.
+## GitHub Pages
 
-There are no package installs or build step. The files are ready to add to a GitHub repository and publish with GitHub Pages or another static host.
-
-## Structure
-
-- index.html — page content and inline vector drawings
-- styles.css — responsive chalkboard design and animations
-- app.js — navigation, card interactions, experience details, and skills/project panels
-- public/images/portrait.jpeg — selected portrait
-- public/files/Bhavesh_Chandak_Resume.pdf — downloadable resume
-
+Pushes to `main` build `dist/` and publish it through GitHub Pages. The repository's Pages source must be set to **GitHub Actions**.
